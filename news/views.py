@@ -25,3 +25,11 @@ def scrape(request):
         new_headline.image = image_src
         new_headline.save()
         return redirect("../")
+
+
+def news_list(requests):
+    headlines = Headline.objects.all()[:: -1]
+    context = {
+        'object_list': headlines,
+    }
+    return render(requests, "news/home.html", context)
